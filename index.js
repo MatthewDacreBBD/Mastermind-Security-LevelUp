@@ -23,7 +23,7 @@ const getWinningRow = () => {
     return row;
 }
 
-const submitRow = (event, winningRow) => {
+const submitRow = (event, winningRow, index, gameBoard) => {
     let rowColours = [];
     event.target.parentElement.childNodes.forEach(element => {
         rowColours.push(element.style.background)
@@ -33,7 +33,10 @@ const submitRow = (event, winningRow) => {
         console.log('You have won the game');
     }
     else {
-       console.log(rowColours)
+       if (index !== gameBoard.childNodes.length - 1) {
+        let c = gameBoard.childNodes[index + 1];
+        gameBoard.childNodes[index + 1].childNodes[0].hidden = false;
+       }
     }
 }
 
@@ -43,9 +46,11 @@ const winningRow = getWinningRow();
 for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
     const rowButtonsList = document.createElement('ul');
     rowButtonsList.classList.add('game-row');
+    rowButtonsList.hidden = rowIndex !== 0
     for (let buttonIndex = 0; buttonIndex < 4; buttonIndex++) {
         let button = document.createElement('button');
         button.classList.add('game-item');
+        button.style.background = 'white';
         button.addEventListener('click', (event) => {
             event.target.style.background = incrementColour(event.target.style.background);
         });
@@ -53,7 +58,8 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
     }
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Submit';
-    submitButton.addEventListener('click', event => submitRow(event, winningRow));
+    submitButton.classList.add('submit')
+    submitButton.addEventListener('click', event => submitRow(event, winningRow, rowIndex, gameBoard));
     rowButtonsList.appendChild(submitButton);
     const rowItem = document.createElement('li');
     rowItem.appendChild(rowButtonsList);

@@ -1,12 +1,26 @@
 .game-item {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 1rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
     background: transparent;
-    /* border: '1px soldid black'; */
+    border: '1px solid white';
     box-shadow: 0;
+    margin: 1rem;
+
 }
 
 ul.game-row > li {
     display: inline-block;
+}
+
+.submit {
+    margin-left: 3rem;
+    width: 5rem;
+    height: 3rem;
+}
+
+#game-board {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
