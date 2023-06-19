@@ -23,7 +23,20 @@ const getWinningRow = () => {
     return row;
 }
 
+const evaluateRow = (submittedRow, winningRow) => {
+    const results = [0, 0, 0, 0];
+    submittedRow.forEach((colour, index) => {
+        if (winningRow[index] === colour) {
+            results[index] = 2;
+        }
+        else if (winningRow.includes(colour)) {
+            results[index] = 1;
+        }
+    })
+    return results;
+}
 const submitRow = (event, winningRow, index, gameBoard) => {
+
     let rowColours = [];
     event.target.parentElement.childNodes.forEach(element => {
         rowColours.push(element.style.background)
@@ -34,9 +47,11 @@ const submitRow = (event, winningRow, index, gameBoard) => {
     }
     else {
        if (index !== gameBoard.childNodes.length - 1) {
-        let c = gameBoard.childNodes[index + 1];
         gameBoard.childNodes[index + 1].childNodes[0].hidden = false;
+        gameBoard.childNodes[index].childNodes[0].childNodes[4].hidden = true;
+        gameBoard.childNodes[index].childNodes[0].childNodes.forEach((button) => button.disabled = true);
        }
+       console.log(evaluateRow(rowColours, winningRow));
     }
 }
 
