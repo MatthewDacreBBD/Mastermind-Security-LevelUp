@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MastermindService", "MastermindService\MastermindService.csproj", "{E199470D-29BF-4257-B863-B36F95E95601}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{84223941-3375-4E1A-8D9F-9DF123061B17}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MastermindDB", "MastermindDB\MastermindDB.sqlproj", "{73452129-A369-424F-A99D-CD1EDFBEBD50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E199470D-29BF-4257-B863-B36F95E95601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E199470D-29BF-4257-B863-B36F95E95601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E199470D-29BF-4257-B863-B36F95E95601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E199470D-29BF-4257-B863-B36F95E95601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73452129-A369-424F-A99D-CD1EDFBEBD50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73452129-A369-424F-A99D-CD1EDFBEBD50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73452129-A369-424F-A99D-CD1EDFBEBD50}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{73452129-A369-424F-A99D-CD1EDFBEBD50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73452129-A369-424F-A99D-CD1EDFBEBD50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73452129-A369-424F-A99D-CD1EDFBEBD50}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{73452129-A369-424F-A99D-CD1EDFBEBD50} = {84223941-3375-4E1A-8D9F-9DF123061B17}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E06F4760-0B8E-4827-9900-27CEDFAB55BB}
+	EndGlobalSection
+EndGlobal

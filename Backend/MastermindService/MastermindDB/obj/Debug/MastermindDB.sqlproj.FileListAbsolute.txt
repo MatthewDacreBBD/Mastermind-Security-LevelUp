@@ -1,0 +1,6 @@
+C:\Users\bbdnet2848\Desktop\Level_Ups\Security_Levelup\Mastermind-Security-LevelUp\Backend\MastermindService\MastermindDB\bin\Debug\MastermindDB.dacpac
+C:\Users\bbdnet2848\Desktop\Level_Ups\Security_Levelup\Mastermind-Security-LevelUp\Backend\MastermindService\MastermindDB\bin\Debug\MastermindDB.dll
+C:\Users\bbdnet2848\Desktop\Level_Ups\Security_Levelup\Mastermind-Security-LevelUp\Backend\MastermindService\MastermindDB\bin\Debug\MastermindDB.pdb
+C:\Users\bbdnet2848\Desktop\Level_Ups\Security_Levelup\Mastermind-Security-LevelUp\Backend\MastermindService\MastermindDB\obj\Debug\MastermindDB.sqlproj.AssemblyReference.cache
+C:\Users\bbdnet2848\Desktop\Level_Ups\Security_Levelup\Mastermind-Security-LevelUp\Backend\MastermindService\MastermindDB\obj\Debug\MastermindDB.dll
+C:\Users\bbdnet2848\Desktop\Level_Ups\Security_Levelup\Mastermind-Security-LevelUp\Backend\MastermindService\MastermindDB\obj\Debug\MastermindDB.pdb
