@@ -3,9 +3,20 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string connectionString = builder.Configuration["ConnectionString"];
+
+string dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
+string dbUser = Environment.GetEnvironmentVariable("DB_USER");
+string dbName = Environment.GetEnvironmentVariable("DB_NAME");
+string dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+connectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True;";
 
 // Add services to the container.
 
@@ -16,7 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MastermindDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MastermindDB")));
+    options.UseSqlServer(connectionString));
 
 //JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
