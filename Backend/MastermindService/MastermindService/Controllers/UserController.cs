@@ -32,7 +32,7 @@ namespace MastermindService.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<User> users = userLogic.getUserList(db);
+            List<AppUser> users = userLogic.getUserList(db);
             if (users != null)
             {
                 return Ok(users);
@@ -60,7 +60,7 @@ namespace MastermindService.Controllers
 
         // function to register a user
         [HttpPost]
-        public IActionResult RegisterUser([FromBody] User user)
+        public IActionResult RegisterUser([FromBody] AppUser user)
         {
             var result = userLogic.registerUser(user, db);
             return Ok(result);
@@ -68,7 +68,7 @@ namespace MastermindService.Controllers
 
         // function to update user details
         [HttpPut]
-        public IActionResult UpdateUser([FromBody] User user)
+        public IActionResult UpdateUser([FromBody] AppUser user)
         {
             string updateResult = userLogic.updateUser(user, db);
             return Ok(updateResult);
@@ -77,11 +77,11 @@ namespace MastermindService.Controllers
         // login function with token accesss
         [AllowAnonymous]
         [HttpPost("Login")]
-        public IActionResult LoginUser([FromBody] User user)
+        public IActionResult LoginUser([FromBody] AppUser user)
         {
             if (user != null)
             {
-                var resultLogin = db.User.Where(u => u.username == user.username && u.password == user.password).FirstOrDefault();
+                var resultLogin = db.AppUser.Where(u => u.username == user.username && u.password == user.password).FirstOrDefault();
                 if (resultLogin == null)
                 {
                     return BadRequest("Invalid Credentials");
@@ -91,6 +91,21 @@ namespace MastermindService.Controllers
                     resultLogin.authenticationToken = GetToken(resultLogin);
                     return Ok(resultLogin);
                 }
+                /*var dbUser = db.AppUser.FirstOrDefault(u => u.username == user.username);
+                if (dbUser == null)
+                {
+                    return BadRequest("Invalid Credentials");
+                }
+
+                if (BCrypt.Net.BCrypt.Verify(user.password, dbUser.password))
+                {
+                    dbUser.authenticationToken = GetToken(dbUser);
+                    return Ok(dbUser);
+                }
+                else
+                {
+                    return BadRequest("Invalid Credentials");
+                }*/
             }
             else
             {
@@ -99,7 +114,7 @@ namespace MastermindService.Controllers
         }
 
         // helper method to generate the token {can add claims and roles}
-        private string GetToken(User user)
+        private string GetToken(AppUser user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

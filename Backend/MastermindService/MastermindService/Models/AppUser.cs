@@ -1,6 +1,6 @@
 ﻿namespace MastermindService.Models
 {
-    public class User
+    public class AppUser
     {
         public int Id { get; set; }
         public string username { get; set; }

@@ -6,49 +6,44 @@ namespace MastermindService.AppLogic
     //class to handle user logic
     public class UserLogic
     {
-        public User getUserByID(int id, MastermindDBContext db)
+        public AppUser getUserByID(int id, MastermindDBContext db)
         {
-            var user = db.User.Find(id);
+            var user = db.AppUser.Find(id);
             if (user != null)
             {
                 return user;
             }
             else
             {
-                return new User { Id = -1 };
+                return new AppUser { Id = -1 };
             }
         }
 
         // getting a list of all users
-        public List<User> getUserList(MastermindDBContext db)
+        public List<AppUser> getUserList(MastermindDBContext db)
         {
-            List<User> lstUsers = new List<User>();
-            var users = from u in db.User
-                        select u;
-            foreach (var user in users)
-            {
-                lstUsers.Add(user);
-            }
+            List<AppUser> lstUsers = db.AppUser.ToList();
             return lstUsers;
         }
 
         // function to update the user
-        public string registerUser(User user, MastermindDBContext db)
+        public string registerUser(AppUser user, MastermindDBContext db)
         {
             if (user != null)
             {
-                var existingUser = db.User.Find(user.Id);
+                var existingUser = db.AppUser.Find(user.Id);
                 if (existingUser != null)
                 {
                     return "User already exists in database";
                 }
                 else
                 {
-                    db.User.Add(user);
+                    db.AppUser.Add(user);
                     try
                     {
                         db.SaveChanges();
-                    }catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         ex.GetBaseException();
                     }
@@ -63,11 +58,11 @@ namespace MastermindService.AppLogic
         }
 
         // function to update the user
-        public string updateUser(User user, MastermindDBContext db)
+        public string updateUser(AppUser user, MastermindDBContext db)
         {
             if (user != null)
             {
-                var existingUser = db.User.Find(user.Id);
+                var existingUser = db.AppUser.Find(user.Id);
                 if (existingUser != null)
                 {
                     existingUser.username = user.username;

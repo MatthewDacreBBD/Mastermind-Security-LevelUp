@@ -9,7 +9,7 @@ namespace MastermindService.Data
         {
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
         public DbSet<Game> Game { get; set; }
     }
 }

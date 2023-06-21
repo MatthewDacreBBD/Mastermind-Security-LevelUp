@@ -8,7 +8,7 @@ GO
 
 USE MastermindDB;
 
-CREATE TABLE [User] (
+CREATE TABLE [AppUser] (
   [Id] integer PRIMARY KEY IDENTITY(1, 1),
   [username] varchar(max) NOT NULL,
   [password] varchar(max) NOT NULL,
@@ -27,5 +27,5 @@ CREATE TABLE [Game] (
 )
 GO
 
-ALTER TABLE [Game] ADD FOREIGN KEY ([userId]) REFERENCES [User] ([Id])
+ALTER TABLE [Game] ADD FOREIGN KEY ([userId]) REFERENCES [AppUser] ([Id])
 GO

@@ -18,20 +18,14 @@ namespace MastermindService.AppLogic
             }
         }
 
-        // getting a list of all users
+        // getting a list of all games
         public List<Game> getGameList(MastermindDBContext db)
         {
-            List<Game> lstgames = new List<Game>();
-            var games = from g in db.Game
-                        select g;
-            foreach (var game in games)
-            {
-                lstgames.Add(game);
-            }
+            List<Game> lstgames = db.Game.ToList();
             return lstgames;
         }
 
-        // function to update the user
+        // function to add a game
         public string addGame(Game game, MastermindDBContext db)
         {
             if (game != null)
@@ -62,7 +56,7 @@ namespace MastermindService.AppLogic
             }
         }
 
-        // function to update the user
+        // function to update the game
         public string updateGame(Game game, MastermindDBContext db)
         {
             if (game != null)
