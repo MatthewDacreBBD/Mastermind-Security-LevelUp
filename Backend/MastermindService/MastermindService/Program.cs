@@ -10,7 +10,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = builder.Configuration["ConnectionString"];
-
+// TODO check for null
 string dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
 string dbUser = Environment.GetEnvironmentVariable("DB_USER");
 string dbName = Environment.GetEnvironmentVariable("DB_NAME");
