@@ -35,23 +35,39 @@ const evaluateRow = (submittedRow, winningRow) => {
     })
     return results;
 }
+
 const submitRow = (event, winningRow, index, gameBoard) => {
 
     let rowColours = [];
     event.target.parentElement.childNodes.forEach(element => {
-        rowColours.push(element.style.background)
+        rowColours.push(element.style.background);
     });
     rowColours = rowColours.slice(0, -1);
+    rowColours = rowColours.slice(0, 4);
+
+    const results = evaluateRow(rowColours, winningRow);
+    console.log(results);
+
+    for (let resultIndex = 4; resultIndex < results.length + 4; resultIndex++) {
+        if (results[resultIndex - 4] === 1) {
+            gameBoard.childNodes[index].childNodes[0].childNodes[resultIndex].style.background = 'pink';
+        }
+        if (results[resultIndex - 4] === 2) {
+            gameBoard.childNodes[index].childNodes[0].childNodes[resultIndex].style.background = 'black';
+        }
+    }
+
     if (rowColours.join(',') === winningRow.join(',')) {
         console.log('You have won the game');
     }
     else {
-       if (index !== gameBoard.childNodes.length - 1) {
-        gameBoard.childNodes[index + 1].childNodes[0].hidden = false;
-        gameBoard.childNodes[index].childNodes[0].childNodes[4].hidden = true;
-        gameBoard.childNodes[index].childNodes[0].childNodes.forEach((button) => button.disabled = true);
-       }
-       console.log(evaluateRow(rowColours, winningRow));
+        if (index !== gameBoard.childNodes.length - 1) {
+            gameBoard.childNodes[index + 1].childNodes[0].hidden = false;
+            //gameBoard.childNodes[index].childNodes[0].childNodes[4].hidden = true;
+            for (let gameItemIndex = 0; gameItemIndex < 4; gameItemIndex++) {
+                gameBoard.childNodes[index].childNodes[0].childNodes[gameItemIndex].disabled = true;
+            }
+        }
     }
 }
 
@@ -71,6 +87,19 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
         });
         rowButtonsList.appendChild(button);
     }
+
+    for (let indicatorIndex = 0; indicatorIndex < 4; indicatorIndex++) {
+        let indicator = document.createElement('button');
+        indicator.classList.add('game-item-indicator');
+        indicator.style.background = 'white';
+        const disableButton = () => {
+            indicator.disabled = true;
+        };
+        indicator.addEventListener('click', disableButton);
+        rowButtonsList.appendChild(indicator);
+    }
+
+    
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Submit';
     submitButton.classList.add('submit')
