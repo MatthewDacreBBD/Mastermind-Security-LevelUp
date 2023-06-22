@@ -10,13 +10,23 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 string connectionString = builder.Configuration["ConnectionString"];
-// TODO check for null
+
 string dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
 string dbUser = Environment.GetEnvironmentVariable("DB_USER");
 string dbName = Environment.GetEnvironmentVariable("DB_NAME");
 string dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
-connectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True;";
+if (dbServer != null && dbUser != null && dbName != null && dbPassword != null)
+{
+    connectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPassword};TrustServerCertificate=True;";
+
+    builder.Services.AddDbContext<MastermindDBContext>(options =>
+    options.UseSqlServer(connectionString));
+}
+else
+{
+    Console.WriteLine("Error: Environment variables are not set correctly");
+}
 
 // Add services to the container.
 
@@ -25,9 +35,6 @@ builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<MastermindDBContext>(options =>
-    options.UseSqlServer(connectionString));
 
 //JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
