@@ -1,0 +1,12 @@
+.game-item {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 1rem;
+    background: transparent;
+    /* border: '1px soldid black'; */
+    box-shadow: 0;
+}
+
+ul.game-row > li {
+    display: inline-block;
+}
