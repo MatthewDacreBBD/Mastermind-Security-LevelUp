@@ -111,3 +111,26 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
 }
 
 console.log(winningRow);
+
+// Mock data
+const leaderboardData = [
+    { position: 1, username: 'John', score: 5000 },
+    { position: 2, username: 'Alice', score: 4500 },
+    { position: 3, username: 'Bob', score: 4000 },
+];
+
+const populateLeaderboard = () => {
+    const leaderboardList = document.getElementById('leaderboard-list');
+
+    leaderboardData.forEach((record) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+        <span class="position">${record.position}</span>
+        <span class="username">${record.username}</span>
+        <span class="score">${record.score}</span>
+      `;
+        leaderboardList.appendChild(listItem);
+    });
+};
+
+populateLeaderboard();

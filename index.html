@@ -10,31 +10,41 @@
 </head>
 
 <body>
-    <section>
 
-        <h1></h1>
-        <script>
-            fetch('https://lp2tgwadmksv772cm254mromfi0ulqfd.lambda-url.af-south-1.on.aws/api/User')
-                .then(res => {
-                    console.log(res);
-                    return res.json();
-                })
-                .then(data => {
-                    data.forEach(user => {
-                        document.querySelector('h1').textContent = `Welcome ${user.username} (This is from the backend)`;
-                        return;
-                    });
-                })
-                .catch(error => console.log(error));
-        </script>
-        <ul class="indicator-list">
-            <li><button id="indicator-incorrect"></button>Incorrect colour</li>
-            <li></li><button id="indicator-half-correct"></button>Correct colour but wrong location</li>
-            <li></li><button id="indicator-correct"></button>Correct colour and correct location</li>
-        </ul>
+    <main class="mainContainer">
 
-        <ul id="game-board"></ul>
-    </section>
+        <section class="gameSection">
+            <h1></h1>
+            <script>
+                fetch('https://lp2tgwadmksv772cm254mromfi0ulqfd.lambda-url.af-south-1.on.aws/api/User')
+                    .then(res => {
+                        console.log(res);
+                        return res.json();
+                    })
+                    .then(data => {
+                        data.forEach(user => {
+                            document.querySelector('h1').textContent = `Welcome ${user.username} (This is from the backend)`;
+                            return;
+                        });
+                    })
+                    .catch(error => console.log(error));
+            </script>
+            <ul class="indicator-list">
+                <li><button id="indicator-incorrect"></button>Incorrect colour</li>
+                <li></li><button id="indicator-half-correct"></button>Correct colour but wrong location</li>
+                <li></li><button id="indicator-correct"></button>Correct colour and correct location</li>
+            </ul>
+
+            <ul id="game-board"></ul>
+        </section>
+
+        <section class="leaderboardSection">
+            <article class="leaderboard">
+                <h2>Leaderboard</h2>
+                <ol class="leaderboard-list" id="leaderboard-list"></ol>
+            </article>
+        </section>
+    </main>
 </body>
 
 </html>
