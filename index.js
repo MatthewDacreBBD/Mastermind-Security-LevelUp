@@ -11,7 +11,7 @@ const incrementColour = (colour) => {
         default:
             return 'red';
     }
-}
+};
 
 const getWinningRow = () => {
     const row = [];
@@ -21,7 +21,7 @@ const getWinningRow = () => {
     }
 
     return row;
-}
+};
 
 const evaluateRow = (submittedRow, winningRow) => {
     const results = [0, 0, 0, 0];
@@ -32,9 +32,9 @@ const evaluateRow = (submittedRow, winningRow) => {
         else if (winningRow.includes(colour)) {
             results[index] = 1;
         }
-    })
+    });
     return results;
-}
+};
 
 const submitRow = (event, winningRow, index, gameBoard) => {
 
@@ -69,7 +69,7 @@ const submitRow = (event, winningRow, index, gameBoard) => {
             }
         }
     }
-}
+};
 
 const gameBoard = document.getElementById('game-board');
 const winningRow = getWinningRow();
@@ -77,7 +77,7 @@ const winningRow = getWinningRow();
 for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
     const rowButtonsList = document.createElement('ul');
     rowButtonsList.classList.add('game-row');
-    rowButtonsList.hidden = rowIndex !== 0
+    rowButtonsList.hidden = rowIndex !== 0;
     for (let buttonIndex = 0; buttonIndex < 4; buttonIndex++) {
         let button = document.createElement('button');
         button.classList.add('game-item');
@@ -99,10 +99,10 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
         rowButtonsList.appendChild(indicator);
     }
 
-    
+
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Submit';
-    submitButton.classList.add('submit')
+    submitButton.classList.add('submit');
     submitButton.addEventListener('click', event => submitRow(event, winningRow, rowIndex, gameBoard));
     rowButtonsList.appendChild(submitButton);
     const rowItem = document.createElement('li');
@@ -117,6 +117,9 @@ const leaderboardData = [
     { position: 1, username: 'John', score: 5000 },
     { position: 2, username: 'Alice', score: 4500 },
     { position: 3, username: 'Bob', score: 4000 },
+    { position: 4, username: 'William', score: 3500 },
+    { position: 5, username: 'Mary', score: 3000 },
+    { position: 6, username: 'Samantha', score: 2500 },
 ];
 
 const populateLeaderboard = () => {
@@ -125,7 +128,10 @@ const populateLeaderboard = () => {
     leaderboardData.forEach((record) => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-        <span class="position">${record.position}</span>
+        ${(record.position === 1 && '<i class="fas fa-medal" style="color: gold; margin-left: 8px; margin-right: 8px;"></i>') ||
+            (record.position === 2 && '<i class="fas fa-medal" style="color: silver; margin-left: 8px; margin-right: 8px;"></i>') ||
+            (record.position === 3 && '<i class="fas fa-medal" style="color: #CD7F32; margin-left: 8px; margin-right: 8px;"></i>') ||
+            `<span class="position">${record.position}</span>`}
         <span class="username">${record.username}</span>
         <span class="score">${record.score}</span>
       `;
