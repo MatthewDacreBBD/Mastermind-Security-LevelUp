@@ -39,9 +39,23 @@ const submitRow = (event, winningRow, index, gameBoard) => {
     const colourResults = ['orange', 'yellow', 'green'];
     let rowColours = [];
     event.target.parentElement.childNodes.forEach(element => {
-        rowColours.push(element.style.background)
+        rowColours.push(element.style.background);
     });
     rowColours = rowColours.slice(0, -1);
+    rowColours = rowColours.slice(0, 4);
+
+    const results = evaluateRow(rowColours, winningRow);
+    console.log(results);
+
+    for (let resultIndex = 4; resultIndex < results.length + 4; resultIndex++) {
+        if (results[resultIndex - 4] === 1) {
+            gameBoard.childNodes[index].childNodes[0].childNodes[resultIndex].style.background = 'pink';
+        }
+        if (results[resultIndex - 4] === 2) {
+            gameBoard.childNodes[index].childNodes[0].childNodes[resultIndex].style.background = 'black';
+        }
+    }
+
     if (rowColours.join(',') === winningRow.join(',')) {
         alert('You have won the game. Congratulations');
         // TODO: Redirect to leaderboard page with user ID
@@ -76,6 +90,19 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
         });
         rowButtonsList.appendChild(button);
     }
+
+    for (let indicatorIndex = 0; indicatorIndex < 4; indicatorIndex++) {
+        let indicator = document.createElement('button');
+        indicator.classList.add('game-item-indicator');
+        indicator.style.background = 'white';
+        const disableButton = () => {
+            indicator.disabled = true;
+        };
+        indicator.addEventListener('click', disableButton);
+        rowButtonsList.appendChild(indicator);
+    }
+
+    
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Submit';
     submitButton.classList.add('submit')
