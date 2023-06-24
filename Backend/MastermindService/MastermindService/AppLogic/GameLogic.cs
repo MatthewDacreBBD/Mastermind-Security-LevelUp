@@ -89,5 +89,24 @@ namespace MastermindService.AppLogic
                 return "Details provided are null";
             }
         }
+
+        public List<Leaderboard> getLeaderboards(MastermindDBContext db)
+        {
+            List<Leaderboard> lstLeaderboard = new List<Leaderboard>();
+            List<AppUser> lstUsers = db.AppUser.ToList();
+            List<Game> lstGames = db.Game.ToList();
+
+            foreach (var user in lstUsers)
+            {
+                foreach (var game in lstGames)
+                {
+                    if (user.Id == game.userId)
+                    {
+                        lstLeaderboard.Add(new Leaderboard(game, user.username));
+                    }
+                }
+            }
+            return lstLeaderboard;
+        }
     }
 }
