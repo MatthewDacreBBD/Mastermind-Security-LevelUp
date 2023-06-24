@@ -52,5 +52,13 @@ namespace MastermindService.Controllers
         {
             var response = gameLogic.updateGame(game, db);
         }
+
+        [HttpGet]
+        [Route("/api/leaderboard")]
+        public IActionResult GetLeaderboard()
+        {
+            List<Leaderboard> lstLeaderboard = gameLogic.getLeaderboards(db);
+            return Ok(lstLeaderboard);
+        }
     }
 }
