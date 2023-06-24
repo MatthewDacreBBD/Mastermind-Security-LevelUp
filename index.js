@@ -23,7 +23,20 @@ const getWinningRow = () => {
     return row;
 }
 
-const submitRow = (event, winningRow) => {
+const evaluateRow = (submittedRow, winningRow) => {
+    const results = [0, 0, 0, 0];
+    submittedRow.forEach((colour, index) => {
+        if (winningRow[index] === colour) {
+            results[index] = 2;
+        }
+        else if (winningRow.includes(colour)) {
+            results[index] = 1;
+        }
+    })
+    return results;
+}
+const submitRow = (event, winningRow, index, gameBoard) => {
+    const colourResults = ['orange', 'yellow', 'green'];
     let rowColours = [];
     event.target.parentElement.childNodes.forEach(element => {
         rowColours.push(element.style.background)
@@ -33,7 +46,15 @@ const submitRow = (event, winningRow) => {
         console.log('You have won the game');
     }
     else {
-       console.log(rowColours)
+       if (index !== gameBoard.childNodes.length - 1) {
+        gameBoard.childNodes[index + 1].childNodes[0].hidden = false;
+        gameBoard.childNodes[index].childNodes[0].childNodes[4].hidden = true;
+        gameBoard.childNodes[index].childNodes[0].childNodes.forEach((button) => button.disabled = true);
+       }
+       let result = evaluateRow(rowColours, winningRow);
+       for (let i = 0; i < result.length; i++) {
+            event.target.parentElement.childNodes[i].style.border = `5px dashed ${colourResults[result[i]]}`;
+       }
     }
 }
 
@@ -43,9 +64,11 @@ const winningRow = getWinningRow();
 for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
     const rowButtonsList = document.createElement('ul');
     rowButtonsList.classList.add('game-row');
+    rowButtonsList.hidden = rowIndex !== 0
     for (let buttonIndex = 0; buttonIndex < 4; buttonIndex++) {
         let button = document.createElement('button');
         button.classList.add('game-item');
+        button.style.background = 'white';
         button.addEventListener('click', (event) => {
             event.target.style.background = incrementColour(event.target.style.background);
         });
@@ -53,7 +76,8 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
     }
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Submit';
-    submitButton.addEventListener('click', event => submitRow(event, winningRow));
+    submitButton.classList.add('submit')
+    submitButton.addEventListener('click', event => submitRow(event, winningRow, rowIndex, gameBoard));
     rowButtonsList.appendChild(submitButton);
     const rowItem = document.createElement('li');
     rowItem.appendChild(rowButtonsList);
