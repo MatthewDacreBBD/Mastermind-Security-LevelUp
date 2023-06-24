@@ -125,18 +125,28 @@ const leaderboardData = [
 const populateLeaderboard = () => {
     const leaderboardList = document.getElementById('leaderboard-list');
 
-    leaderboardData.forEach((record) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-        ${(record.position === 1 && '<i class="fas fa-medal" style="color: gold; margin-left: 8px; margin-right: 8px;"></i>') ||
-            (record.position === 2 && '<i class="fas fa-medal" style="color: silver; margin-left: 8px; margin-right: 8px;"></i>') ||
-            (record.position === 3 && '<i class="fas fa-medal" style="color: #CD7F32; margin-left: 8px; margin-right: 8px;"></i>') ||
-            `<span class="position">${record.position}</span>`}
-        <span class="username">${record.username}</span>
-        <span class="score">${record.score}</span>
-      `;
-        leaderboardList.appendChild(listItem);
-    });
+    fetch('https://lp2tgwadmksv772cm254mromfi0ulqfd.lambda-url.af-south-1.on.aws/api/Leaderboard')
+        .then(res => {
+            console.log(res);
+            return res.json();
+        })
+        .then(leaderboardData => {
+            let leaderboardIndex = 0;
+            leaderboardData.forEach((record) => {
+                leaderboardIndex++;
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+            ${(leaderboardIndex === 1 && '<i class="fas fa-medal" style="color: gold; margin-left: 8px; margin-right: 8px;"></i>') ||
+                    (leaderboardIndex === 2 && '<i class="fas fa-medal" style="color: silver; margin-left: 8px; margin-right: 8px;"></i>') ||
+                    (leaderboardIndex === 3 && '<i class="fas fa-medal" style="color: #CD7F32; margin-left: 8px; margin-right: 8px;"></i>') ||
+                    `<span class="position">${leaderboardIndex}</span>`}
+            <span class="username">${record.username}</span>
+            <span class="score">${record.score}</span>
+          `;
+                leaderboardList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.log(error));
 };
 
 populateLeaderboard();
