@@ -43,7 +43,9 @@ const submitRow = (event, winningRow, index, gameBoard) => {
     });
     rowColours = rowColours.slice(0, -1);
     if (rowColours.join(',') === winningRow.join(',')) {
-        console.log('You have won the game');
+        alert('You have won the game. Congratulations');
+        // TODO: Redirect to leaderboard page with user ID
+        // window.location(/leaderboard)
     }
     else {
        if (index !== gameBoard.childNodes.length - 1) {
