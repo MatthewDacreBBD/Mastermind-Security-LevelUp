@@ -1,22 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login Form</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-    />
-    <link rel="stylesheet" type="text/css" href="../Styles/Login.css" />
-  </head>
-  <body>
-    <form class="container">
-      <h2>Login</h2>
-      <label for="username">Username</label>
-      <input type="text" id="username" required />
-      <label for="password">Password</label>
-      <input type="password" id="password" required />
-      <button type="submit">Login</button>
-      <p3>Dont have an account? Register here</p3>
-    </form>
-  </body>
+
+<head>
+  <title>Login Form</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" type="text/css" href="/Styles/Login.css" />
+
+</head>
+
+<body>
+  <form class="container" id="form">
+    <h2>Login</h2>
+    <label for="username">Username</label>
+    <input type="text" id="username" required />
+    <label for="password">Password</label>
+    <input type="password" id="password" required />
+    <button type="submit">Login</button>
+    <p3>Dont have an account? Register here</p3>
+  </form>
+
+  <script>
+    const submitLogin = (event) => {
+      event.preventDefault();
+      fetch(
+        'https://localhost:7184/api/User/Login',
+        {
+          method: 'POST',
+          mode: 'cors',
+          headers:
+          {
+            'Content-Type': 'application/JSON'
+          },
+          //TODO: Sanitize
+          body: JSON.stringify(
+            {
+              username: event.target.elements['username'].value,
+              password: event.target.elements['password'].value
+            }
+          )
+
+        }
+      ).then((res) => {
+        if (res.status !== 200) {
+          alert("An error has occured, please try again.");
+        }
+        else {
+          res.json().then((j) => {
+            let token = j['authenticationToken'];
+            console.log(token);
+          })
+        }
+      }
+      )
+
+    }
+
+    const form = document.getElementById('form');
+    form.addEventListener('submit', submitLogin);
+  </script>
+</body>
+
 </html>
