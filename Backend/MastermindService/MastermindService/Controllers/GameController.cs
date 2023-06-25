@@ -53,6 +53,7 @@ namespace MastermindService.Controllers
             var response = gameLogic.updateGame(game, db);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("/api/leaderboard")]
         public IActionResult GetLeaderboard()
