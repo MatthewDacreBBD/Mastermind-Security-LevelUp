@@ -60,6 +60,8 @@ namespace MastermindService.Controllers
 
         // function to register a user
         [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("Register")]
         public IActionResult RegisterUser([FromBody] AppUser user)
         {
             var result = userLogic.registerUser(user, db);
