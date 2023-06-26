@@ -5,7 +5,7 @@
   <title>Login Form</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   <link rel="stylesheet" type="text/css" href="/Styles/Login.css" />
-
+  <script defer src="../Components/Login.js"></script>
 </head>
 
 <body>
@@ -18,54 +18,6 @@
     <button type="submit">Login</button>
     <p3>Dont have an account? Register here</p3>
   </form>
-
-  <script>
-    const bcrypt = require('brcypt');
-    const submitLogin = (event) => {
-      event.preventDefault();
-      let username = event.target.elements['username'].value;
-      let password = event.target.elements['password'].value;
-      bcrypt.hash(
-        password, 10, (err, hash) => {
-          fetch(
-            'https://5tzus5shoyscskyohwtq4ccfoy0aswsy.lambda-url.af-south-1.on.aws/api/User/Login',
-            {
-              method: 'POST',
-              mode: 'cors',
-              headers:
-              {
-                'Content-Type': 'application/JSON'
-              },
-              //TODO: Sanitize
-              body: JSON.stringify(
-                {
-                  username,
-                  password
-                }
-              )
-
-            }
-          ).then((res) => {
-            if (res.status !== 200) {
-              alert("An error has occured, please try again.");
-            }
-            else {
-              res.json().then((j) => {
-                let token = j['authenticationToken'];
-                console.log(token);
-                window.location.href = `index.html?token=${token}`
-              })
-            }
-          }
-          )
-        }
-      )
-
-    }
-
-    const form = document.getElementById('form');
-    form.addEventListener('submit', submitLogin);
-  </script>
 </body>
 
 </html>
