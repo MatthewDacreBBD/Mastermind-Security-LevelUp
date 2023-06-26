@@ -10,6 +10,5 @@ namespace MastermindService.Data
         }
 
         public DbSet<AppUser> AppUser { get; set; }
-        public DbSet<Game> Game { get; set; }
     }
 }

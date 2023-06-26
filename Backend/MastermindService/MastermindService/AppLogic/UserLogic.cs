@@ -20,9 +20,9 @@ namespace MastermindService.AppLogic
         }
 
         // getting a list of all users
-        public List<AppUser> getUserList(MastermindDBContext db)
+        public List<AppUserDTO> getUserList(MastermindDBContext db)
         {
-            List<AppUser> lstUsers = db.AppUser.ToList();
+            List<AppUserDTO> lstUsers = db.AppUser.Select(x => new AppUserDTO(x.Id, x.username)).ToList();
             return lstUsers;
         }
 
@@ -69,7 +69,6 @@ namespace MastermindService.AppLogic
                     existingUser.password = user.password;
                     existingUser.wins = user.wins;
                     existingUser.losses = user.losses;
-                    existingUser.passwordSalt = user.passwordSalt;
                     existingUser.authenticationToken = "";
                     try
                     {

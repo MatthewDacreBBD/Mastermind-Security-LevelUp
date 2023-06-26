@@ -58,7 +58,7 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="User.sql" />
+    <Build Include="AppUser.sql" />
     <Build Include="Game.sql" />
   </ItemGroup>
 </Project>

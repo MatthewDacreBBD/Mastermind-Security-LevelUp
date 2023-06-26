@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MastermindGameService", "MastermindGameService\MastermindGameService.csproj", "{81CB5907-FE6E-4BF5-9147-2A064D143571}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F6CFFF43-8301-40F5-99FA-900163996E90}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GameDB", "GameDB\GameDB.sqlproj", "{345702DC-6CA7-440C-8079-1248309B8043}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81CB5907-FE6E-4BF5-9147-2A064D143571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81CB5907-FE6E-4BF5-9147-2A064D143571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81CB5907-FE6E-4BF5-9147-2A064D143571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81CB5907-FE6E-4BF5-9147-2A064D143571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{345702DC-6CA7-440C-8079-1248309B8043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{345702DC-6CA7-440C-8079-1248309B8043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{345702DC-6CA7-440C-8079-1248309B8043}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{345702DC-6CA7-440C-8079-1248309B8043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{345702DC-6CA7-440C-8079-1248309B8043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{345702DC-6CA7-440C-8079-1248309B8043}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{345702DC-6CA7-440C-8079-1248309B8043} = {F6CFFF43-8301-40F5-99FA-900163996E90}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D1925E4-AFD4-4296-A886-EBB75CF42EDC}
+	EndGlobalSection
+EndGlobal
