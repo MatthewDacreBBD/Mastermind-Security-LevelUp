@@ -113,6 +113,8 @@ namespace MastermindService.Controllers
 
         // function to register a user
         [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("Register")]
         public IActionResult RegisterUser([FromBody] AppUser user)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.password);
