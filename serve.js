@@ -7,16 +7,18 @@ var privateKey  = fs.readFileSync('selfsigned.key', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 const app = express();
+app.use(express.static(__dirname))
 var httpsServer = https.createServer(credentials, app);
 const port = process.env.PORT || 8443;
 
-// sendFile will go here
 app.get('/login', function(req, res) {
-  res.sendFile('./Components/login.html', {root: __dirname});
+  res.sendFile('login.html', {root: './Components'});
 });
 app.get('/register', function(req, res) {
-  res.sendFile('./Components/register.html', {root: __dirname});
+  res.sendFile('register.html', { root: './Components'});
 })
 
-app.listen(port);
-console.log('Server started at http://localhost:' + port);
+let server = https.createServer(credentials, app);
+server.listen(port, () => {
+console.log('Server started at https://localhost:' + port);
+})
