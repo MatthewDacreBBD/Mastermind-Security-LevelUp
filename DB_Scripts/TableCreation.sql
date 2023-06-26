@@ -15,7 +15,6 @@ CREATE TABLE [AppUser] (
   [passwordSalt] varchar(max) NOT NULL,
   [wins] int NOT NULL,
   [losses] int NOT NULL,
-  [authenticationToken] varchar(max) NOT NULL
 )
 GO
 
