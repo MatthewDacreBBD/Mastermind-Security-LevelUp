@@ -26,7 +26,11 @@ $env:DB_PASSWORD='your DB password'
 
 You should now be able to run the CSharp project, and it will connect to the database.
 
-TODO: Gen cert keys
+The frontend needs to be served via https in order to communicate with the backend API. In order to do this, a private key and certificate need to be generated. This can be done as follows:
+
+```sh
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./selfsigned.key -out selfsigned.crt
+```
 
 Next, run the frontend by running these two commands: 
 
