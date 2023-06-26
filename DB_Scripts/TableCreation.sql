@@ -12,7 +12,6 @@ CREATE TABLE [AppUser] (
   [Id] integer PRIMARY KEY IDENTITY(1, 1),
   [username] varchar(max) NOT NULL,
   [password] varchar(max) NOT NULL,
-  [passwordSalt] varchar(max) NOT NULL,
   [wins] int NOT NULL,
   [losses] int NOT NULL,
 )
