@@ -122,10 +122,18 @@ const leaderboardData = [
     { position: 6, username: 'Samantha', score: 2500 },
 ];
 
-const populateLeaderboard = () => {
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+
+const populateLeaderboard = (token) => {
     const leaderboardList = document.getElementById('leaderboard-list');
 
-    fetch('https://5tzus5shoyscskyohwtq4ccfoy0aswsy.lambda-url.af-south-1.on.aws/api/Leaderboard')
+    fetch('https://5tzus5shoyscskyohwtq4ccfoy0aswsy.lambda-url.af-south-1.on.aws/api/Leaderboard', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
         .then(res => {
             console.log(res);
             return res.json();
@@ -153,4 +161,4 @@ const populateLeaderboard = () => {
         .catch(error => console.log(error));
 };
 
-populateLeaderboard();
+populateLeaderboard(token);
