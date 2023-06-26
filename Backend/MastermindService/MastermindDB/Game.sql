@@ -4,5 +4,5 @@
     [userId] INT NOT NULL, 
     [gameStatus] VARCHAR(50) NULL, 
     [score] INT NULL,
-    FOREIGN KEY ([userId]) REFERENCES [dbo].[User] ([Id]),
+    FOREIGN KEY ([userId]) REFERENCES [dbo].[AppUser] ([Id]),
 )

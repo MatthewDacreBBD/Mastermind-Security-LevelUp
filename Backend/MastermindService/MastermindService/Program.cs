@@ -15,6 +15,8 @@ string dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
 string dbUser = Environment.GetEnvironmentVariable("DB_USER");
 string dbName = Environment.GetEnvironmentVariable("DB_NAME");
 string dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+string dbtokenencryptionkey = Environment.GetEnvironmentVariable("TOKEN_KEY");
+string jwtkey = Environment.GetEnvironmentVariable("JWT_KEY");
 
 if (dbServer != null && dbUser != null && dbName != null && dbPassword != null)
 {
@@ -36,6 +38,10 @@ builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*builder.Services.AddDbContext<MastermindDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityDB"));
+});*/
 //JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -47,7 +53,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtkey))
     };
     options.Events = new JwtBearerEvents()
     {
