@@ -3,7 +3,7 @@ const submitRegister = (event) => {
     let username = event.target.elements['username'].value;
     let password = event.target.elements['password'].value;
     fetch(
-        'https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User/Login',
+        'https://localhost:44372/api/User/Login',
         {
             method: 'POST',
             mode: 'cors',

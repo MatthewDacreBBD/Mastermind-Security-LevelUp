@@ -1,7 +1,7 @@
 const submitLogin = (event) => {
 event.preventDefault();
 fetch(
-    'https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User/Register',
+    'https://localhost:44372/api/User/Register',
     {
     method: 'POST',
     mode: 'cors',

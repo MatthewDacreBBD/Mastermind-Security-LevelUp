@@ -83,7 +83,7 @@ const submitRow = (event, winningRow, index, gameBoard) => {
                 }
             )
         fetch(
-            'https://qzzmhm4uyv34m26zfz6njjjyye0djusp.lambda-url.af-south-1.on.aws/api/Game',
+            'https://localhost:44311/api/Game',
             {
                 method: 'POST',
                 mode: 'cors',
@@ -173,7 +173,7 @@ const token = urlParams.get('token');
 const populateLeaderboard = (token) => {
     const leaderboardList = document.getElementById('leaderboard-list');
 
-    fetch('https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User', {
+    fetch('https://localhost:44372/api/User', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -187,7 +187,7 @@ const populateLeaderboard = (token) => {
 
             console.log(users);
 
-            fetch('https://qzzmhm4uyv34m26zfz6njjjyye0djusp.lambda-url.af-south-1.on.aws/api/Game', {
+            fetch('https://localhost:44311/api/Game', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
