@@ -58,7 +58,39 @@ const submitRow = (event, winningRow, index, gameBoard) => {
     }
 
     if (rowColours.join(',') === winningRow.join(',')) {
-        console.log('You have won the game');
+        alert('Congratulations');
+
+        // fetch(
+        //     'https://qzzmhm4uyv34m26zfz6njjjyye0djusp.lambda-url.af-south-1.on.aws/api/Game',
+        //     {
+        //         method: 'POST',
+        //         mode: 'cors',
+        //         headers:
+        //         {
+        //             'Authorization': `Bearer ${token}`,
+        //             'Content-Type': 'application/JSON'
+        //         },
+        //         body: JSON.stringify(
+        //             {
+        //                 // userId:,
+        //                 // gameStatus: 'Won',
+        //                 // score:,
+        //             }
+        //         )
+        //     }
+        // ).then((res) => {
+        //     if (res.status !== 200) {
+        //         alert("An error has occured, please try again.");
+        //     }
+        //     else {
+        //         res.json().then((j) => {
+        //             let token = j['authenticationToken'];
+        //             // sessionStorage.setItem('token', token);s
+        //             window.location.href = `index.html?token=${token}`;
+        //         });
+        //     }
+        // }
+        // )
     }
     else {
         if (index !== gameBoard.childNodes.length - 1) {
@@ -128,7 +160,7 @@ const token = urlParams.get('token');
 const populateLeaderboard = (token) => {
     const leaderboardList = document.getElementById('leaderboard-list');
 
-    fetch('https://5tzus5shoyscskyohwtq4ccfoy0aswsy.lambda-url.af-south-1.on.aws/api/Leaderboard', {
+    fetch('https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -138,25 +170,57 @@ const populateLeaderboard = (token) => {
             console.log(res);
             return res.json();
         })
-        .then(leaderboardData => {
+        .then(users => {
 
-            leaderboardData.sort((a, b) => b.userGame.score - a.userGame.score);
+            console.log(users);
 
-            let leaderboardIndex = 0;
+            fetch('https://qzzmhm4uyv34m26zfz6njjjyye0djusp.lambda-url.af-south-1.on.aws/api/Game', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then(res => {
+                    return res.json();
+                })
+                .then(games => {
 
-            leaderboardData.forEach((record) => {
-                leaderboardIndex++;
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-            ${(leaderboardIndex === 1 && '<i class="fas fa-medal" style="color: gold; margin-left: 8px; margin-right: 8px;"></i>') ||
-                    (leaderboardIndex === 2 && '<i class="fas fa-medal" style="color: silver; margin-left: 8px; margin-right: 8px;"></i>') ||
-                    (leaderboardIndex === 3 && '<i class="fas fa-medal" style="color: #CD7F32; margin-left: 8px; margin-right: 8px;"></i>') ||
-                    `<span class="position">${leaderboardIndex}</span>`}
-            <span class="username">${record.username}</span>
-            <span class="score">${record.userGame.score}</span>
-          `;
-                leaderboardList.appendChild(listItem);
-            });
+                    console.log(games);
+
+                    let leaderboard = [];
+
+                    for (const user of users) {
+                        for (const game of games) {
+                            if (user.userId === game.userId) {
+                                leaderboard.push({
+                                    username: user.userName,
+                                    score: game.score,
+                                });
+                            }
+                        }
+                    }
+
+                    leaderboard.sort((a, b) => b.score - a.score);
+
+                    let leaderboardIndex = 0;
+
+                    leaderboard.forEach((record) => {
+                        leaderboardIndex++;
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                    ${(leaderboardIndex === 1 && '<i class="fas fa-medal" style="color: gold; margin-left: 8px; margin-right: 8px;"></i>') ||
+                            (leaderboardIndex === 2 && '<i class="fas fa-medal" style="color: silver; margin-left: 8px; margin-right: 8px;"></i>') ||
+                            (leaderboardIndex === 3 && '<i class="fas fa-medal" style="color: #CD7F32; margin-left: 8px; margin-right: 8px;"></i>') ||
+                            `<span class="position">${leaderboardIndex}</span>`}
+                    <span class="username">${record.username}</span>
+                    <span class="score">${record.score}</span>
+                  `;
+                        leaderboardList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         })
         .catch(error => console.log(error));
 };
