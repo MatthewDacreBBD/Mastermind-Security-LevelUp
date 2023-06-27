@@ -61,7 +61,6 @@ const submitRow = (event, winningRow, index, gameBoard) => {
     rowColours = rowColours.slice(0, 4);
 
     const results = evaluateRow(rowColours, winningRow);
-    console.log(results);
 
     for (let resultIndex = 4; resultIndex < results.length + 4; resultIndex++) {
         if (results[resultIndex - 4] === 1) {
@@ -99,7 +98,6 @@ const submitRow = (event, winningRow, index, gameBoard) => {
                 alert("An error has occured, please try again.");
             }
             else {
-                console.log(res);
                 window.location.href = `index.html?token=${token}`;
             }
         }
@@ -155,7 +153,6 @@ for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
     gameBoard.appendChild(rowItem);
 }
 
-console.log(winningRow);
 
 // Mock data
 const leaderboardData = [
@@ -180,12 +177,9 @@ const populateLeaderboard = (token) => {
         },
     })
         .then(res => {
-            console.log(res);
             return res.json();
         })
         .then(users => {
-
-            console.log(users);
 
             fetch('https://localhost:44311/api/Game', {
                 method: 'GET',
@@ -197,8 +191,6 @@ const populateLeaderboard = (token) => {
                     return res.json();
                 })
                 .then(games => {
-
-                    console.log(games);
 
                     let leaderboard = [];
 

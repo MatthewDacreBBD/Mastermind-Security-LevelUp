@@ -1,7 +1,7 @@
 const submitLogin = (event) => {
 event.preventDefault();
 fetch(
-    'https://localhost:44372/api/User/Register',
+    'https://localhost:44372/api/User',
     {
     method: 'POST',
     mode: 'cors',
