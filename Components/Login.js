@@ -26,7 +26,6 @@ const submitRegister = (event) => {
         else {
             res.json().then((j) => {
                 let token = j['authenticationToken'];
-                // sessionStorage.setItem('token', token);s
                 window.location.href = `index.html?token=${token}`;
             });
         }

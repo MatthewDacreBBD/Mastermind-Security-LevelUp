@@ -36,6 +36,21 @@ const evaluateRow = (submittedRow, winningRow) => {
     return results;
 };
 
+const getIdFromToken = (token) => {
+
+    const [headerEncoded, payloadEncoded, signatureEncoded] = token.split(".");
+
+    const header = atob(headerEncoded.replace(/-/g, "+").replace(/_/g, "/"));
+
+    const payload = atob(payloadEncoded.replace(/-/g, "+").replace(/_/g, "/"));
+
+    const headerData = JSON.parse(header);
+
+    const payloadData = JSON.parse(payload);
+
+    return payloadData.Id;
+}
+
 const submitRow = (event, winningRow, index, gameBoard) => {
 
     let rowColours = [];
@@ -59,38 +74,36 @@ const submitRow = (event, winningRow, index, gameBoard) => {
 
     if (rowColours.join(',') === winningRow.join(',')) {
         alert('Congratulations');
-
-        // fetch(
-        //     'https://qzzmhm4uyv34m26zfz6njjjyye0djusp.lambda-url.af-south-1.on.aws/api/Game',
-        //     {
-        //         method: 'POST',
-        //         mode: 'cors',
-        //         headers:
-        //         {
-        //             'Authorization': `Bearer ${token}`,
-        //             'Content-Type': 'application/JSON'
-        //         },
-        //         body: JSON.stringify(
-        //             {
-        //                 // userId:,
-        //                 // gameStatus: 'Won',
-        //                 // score:,
-        //             }
-        //         )
-        //     }
-        // ).then((res) => {
-        //     if (res.status !== 200) {
-        //         alert("An error has occured, please try again.");
-        //     }
-        //     else {
-        //         res.json().then((j) => {
-        //             let token = j['authenticationToken'];
-        //             // sessionStorage.setItem('token', token);s
-        //             window.location.href = `index.html?token=${token}`;
-        //         });
-        //     }
-        // }
-        // )
+        let userId = Number.parseInt(getIdFromToken(token));
+        let payload = JSON.stringify(
+                {
+                    userId: userId,
+                    gameStatus: "won",
+                    score: 5 - index
+                }
+            )
+        fetch(
+            'https://qzzmhm4uyv34m26zfz6njjjyye0djusp.lambda-url.af-south-1.on.aws/api/Game',
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers:
+                {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/JSON'
+                },
+                body: payload
+            }
+        ).then((res) => {
+            if (res.status !== 200) {
+                alert("An error has occured, please try again.");
+            }
+            else {
+                console.log(res);
+                window.location.href = `index.html?token=${token}`;
+            }
+        }
+        )
     }
     else {
         if (index !== gameBoard.childNodes.length - 1) {
