@@ -1,7 +1,7 @@
 const submitLogin = (event) => {
 event.preventDefault();
 fetch(
-    'https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User/Register',
+    'https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User',
     {
     method: 'POST',
     mode: 'cors',
@@ -26,7 +26,7 @@ fetch(
     alert("An error has occured, please try again.");
     }
     else {
-    window.location.href = '/login';
+    window.location.href = '/';
     }
 }
 )
