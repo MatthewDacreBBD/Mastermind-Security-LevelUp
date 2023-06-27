@@ -151,6 +151,7 @@ namespace MastermindGameService.Controllers
         }
 
         // PUT api/<GameController>/5
+        [Authorize]
         [HttpPut]
         public void UpdateGame([FromBody] Game game)
         {
