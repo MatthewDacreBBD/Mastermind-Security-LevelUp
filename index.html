@@ -15,21 +15,7 @@
     <main class="mainContainer">
 
         <section class="gameSection">
-            <h1></h1>
-            <script>
-                fetch('https://5tzus5shoyscskyohwtq4ccfoy0aswsy.lambda-url.af-south-1.on.aws/api/User')
-                    .then(res => {
-                        console.log(res);
-                        return res.json();
-                    })
-                    .then(data => {
-                        data.forEach(user => {
-                            document.querySelector('h1').textContent = `Welcome ${user.username} (This is from the backend)`;
-                            return;
-                        });
-                    })
-                    .catch(error => console.log(error));
-            </script>
+            <h1>Mastermind</h1>
             <ul class="indicator-list">
                 <li><button id="indicator-incorrect"></button>Incorrect colour</li>
                 <li></li><button id="indicator-half-correct"></button>Correct colour but wrong location</li>

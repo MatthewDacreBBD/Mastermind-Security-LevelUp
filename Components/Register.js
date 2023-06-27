@@ -1,7 +1,7 @@
 const submitLogin = (event) => {
 event.preventDefault();
 fetch(
-    'https://localhost:7184/api/User/Register',
+    'https://tgjpfnhlyqbg46ee34d7ttujp40uejnn.lambda-url.af-south-1.on.aws/api/User/Register',
     {
     method: 'POST',
     mode: 'cors',
@@ -14,6 +14,9 @@ fetch(
         {
             username: event.target.elements['username'].value,
             password: event.target.elements['password'].value,
+            wins: 0,
+            losses: 0,
+            authenticationToken: 'temp-token',
         }
     )
 
