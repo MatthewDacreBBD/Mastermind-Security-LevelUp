@@ -12,10 +12,8 @@ fetch(
     //TODO: Sanitize
     body: JSON.stringify(
         {
-        username: event.target.elements['username'].value,
-        password: event.target.elements['password'].value,
-        wins: 0,
-        losses: 0
+            username: event.target.elements['username'].value,
+            password: event.target.elements['password'].value,
         }
     )
 

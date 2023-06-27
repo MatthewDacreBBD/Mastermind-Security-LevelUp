@@ -20,5 +20,5 @@ app.get('/register', function(req, res) {
 
 let server = https.createServer(credentials, app);
 server.listen(port, () => {
-console.log('Server started at https://localhost:' + port);
+console.log('Server started at https://localhost:' + port + '/login');
 })
