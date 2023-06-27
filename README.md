@@ -1,5 +1,13 @@
 # Mastermind - Security Level Up
 
+## NB
+
+Running the project locally requires you to check out the `local-setup` branch in the git repository. The main branch calls the remote API, so you will not be able to view the database yourself. All other functionality is unchanged.
+
+The frontend expects the backend to be run under the IIS Express profile in visual studio. This runs the Game Service on port 44311 and the Identity server on port 44372.
+
+## Setup
+
 In order to run the project, first you will need to start a SQL Server instance. If it is not already running locally/on a cloud provider, see: https://www.prisma.io/dataguide/mssql/setting-up-a-local-sql-server-database
 
 Once the SQL Server instance is up and running, run the scripts located in DB_Scripts to initialise the tables required, begining with the `TableCreation.sql` scripts. THe origional implementation uses two seperate databases for the identity and resource server, but a single database for local testing should work just as well.
